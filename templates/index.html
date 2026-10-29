@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility Pole Detection Model</title>
+</head>
+<body>
+  <div id="main">
+  <form id="form" class="form" method="post" enctype="multipart/form-data">
+    <label class="file-drop" id="image-drop">
+      <div id="drop-image" class="drop-content">
+        <strong>Upload image</strong>
+        <input type="file" name="image" id="image" accept="image/*" />
+      </div>
+    </label>
+    <br/>
+    <button type="submit">Start model</button>
+  </form>
+  <div class="row">
+    <img id="display" src="" />
+  </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    const form = document.getElementById("form")
+    
+    form.addEventListener("submit", async function(e){
+      e.preventDefault();
+      const fd = new FormData(form)
+      display.src = "";
+      const res = await fetch('/', {method:'POST', body:fd});
+      display.src = `/display?t=${Date.now()}`;
+    });
+  </script>
+</body>
+</html>
